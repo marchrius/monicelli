@@ -52,7 +52,7 @@
 
 %token MAIN ERROR
 %token RETURN
-%token ARTICLE TYPENAME STAR
+%token ARTICLE TYPENAME STAR CONST
 %token VARDECL ASSIGN
 %token PRINT INPUT
 %token ASSERT BANG
@@ -131,7 +131,7 @@
 %type<idval> variable
 %type<numericval> numeric
 %type<mainval> main
-%type<boolval> pointer
+%type<boolval> pointer const
 
 %start program
 
@@ -171,8 +171,8 @@ args_decl:
     }
 ;
 arg_decl:
-    variable pointer TYPENAME {
-        $$ = new FunArg($1, $3, $2);
+    variable pointer TYPENAME const {
+        $$ = new FunArg($1, $3, $2, $4);
     }
 ;
 main:
@@ -205,12 +205,15 @@ statement:
     | COMMA       { $$ = nullptr; }
 ;
 var_decl:
-    VARDECL variable COMMA pointer TYPENAME var_init {
-        $$ = new VarDeclaration($2, $5, $4, $6);
+    VARDECL variable COMMA pointer TYPENAME const var_init {
+        $$ = new VarDeclaration($2, $5, $4, $6, $7);
     }
 ;
 pointer:
     /* epsilon */ { $$ = false; } | STAR { $$ = true; }
+;
+const:
+    /* epsilon */ { $$ = false; } | CONST { $$ = true; }
 ;
 var_init:
     /* epsilon */ { $$ = nullptr; } | ASSIGN expression { $$ = $2; }

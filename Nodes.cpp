@@ -144,6 +144,7 @@ void Branch::emit(std::ostream &stream, int indent) {
 }
 
 void VarDeclaration::emit(std::ostream &stream, int indent) {
+    if (const_) stream << "const ";
     stream << type << ' ';
     if (point) stream << '*';
     name->emit(stream);
@@ -203,7 +204,7 @@ void FunctionCall::emit(std::ostream &stream, int indent) {
 }
 
 void FunArg::emit(std::ostream &stream, int indent) {
-    stream << type << (pointer? "* ": " ");
+    stream << (const_? "const ": "") << type << (pointer? "* ": " ");
     name->emit(stream);
 }
 

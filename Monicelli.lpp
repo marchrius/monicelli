@@ -84,6 +84,9 @@ CHAR  [a-zA-Z_]
 "conte" {
     return token::STAR;
 }
+"con rinforzino" {
+    return token::CONST;
+}
 "voglio" {
     return token::VARDECL;
 }

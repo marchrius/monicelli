@@ -183,13 +183,14 @@ private:
 
 class VarDeclaration: public Statement {
 public:
-    VarDeclaration(Id *n, Type t, bool p, Expression *i):
-        name(n), point(p), init(i), type(t) {}
+    VarDeclaration(Id *n, Type t, bool p, bool c, Expression *i):
+        name(n), point(p), const_(c), init(i), type(t) {}
     virtual void emit(std::ostream &stream, int indent = 0);
 
 private:
     Pointer<Id> name;
     bool point;
+    bool const_;
     Pointer<Expression> init;
     Type type;
 };
@@ -302,7 +303,7 @@ private:
 
 class FunArg: public Emittable {
 public:
-    FunArg(Id *n, Type t, bool p): name(n), type(t), pointer(p) {}
+    FunArg(Id *n, Type t, bool p, bool c): name(n), type(t), pointer(p), const_(c) {}
     virtual ~FunArg() {}
 
     virtual void emit(std::ostream &stream, int indent = 0);
@@ -311,6 +312,7 @@ private:
     Pointer<Id> name;
     Type type;
     bool pointer;
+    bool const_;
 };
 
 
