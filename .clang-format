@@ -1,0 +1,13 @@
+---
+BasedOnStyle: LLVM
+IndentWidth: 2
+---
+Language: Cpp
+PointerAlignment: Left
+AllowShortFunctionsOnASingleLine: Inline
+AllowShortIfStatementsOnASingleLine: true
+ColumnLimit: 100
+AlignEscapedNewlines: DontAlign
+BreakStringLiterals: false
+SpaceAfterTemplateKeyword: false
+SortIncludes: true
